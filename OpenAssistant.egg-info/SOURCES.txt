@@ -1,0 +1,8 @@
+README.rst
+setup.py
+OpenAssistant.egg-info/PKG-INFO
+OpenAssistant.egg-info/SOURCES.txt
+OpenAssistant.egg-info/dependency_links.txt
+OpenAssistant.egg-info/entry_points.txt
+OpenAssistant.egg-info/requires.txt
+OpenAssistant.egg-info/top_level.txt

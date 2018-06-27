@@ -9,7 +9,7 @@
 # Environment Configuration
 export USERNAME=$(whoami)
 export ROOT=$( cd $(dirname $0) ; pwd -P )
-export MINDDIR="$ROOT/mind/boot"
+export MINDDIR="~/kittmk1/OpenAssistant/mind/boot"
 export BROWSER="firefox"
 export KEYPRESS="xvkbd -xsendevent -secure -text"
 export TERMINAL="tmux new-window "

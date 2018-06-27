@@ -33,7 +33,7 @@ setup(
     ],
     install_requires=["requests"],
     data_files = [
-        ("./img", ["icon_inactive.png", "icon.png",
+        ("./img", ["icon_inactive.png", "icon.png", ## Here is the problem in setup
             "./etc/commands.json"])
     ],
     entry_points = {

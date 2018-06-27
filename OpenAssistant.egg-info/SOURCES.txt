@@ -1,5 +1,6 @@
 README.rst
 setup.py
+OpenAssistant/__init__.py
 OpenAssistant.egg-info/PKG-INFO
 OpenAssistant.egg-info/SOURCES.txt
 OpenAssistant.egg-info/dependency_links.txt

@@ -4,7 +4,7 @@
 
 import logging
 logging.basicConfig(level=logging.CRITICAL)
-logger = logging.getLogger(__name__)    
+logger = logging.getLogger(__name__)
 
 
 from argparse import ArgumentParser, Namespace
@@ -49,7 +49,7 @@ def _parser(args):
     parser.add_argument("--invalid-sentence-command", type=str,
             dest="invalid_sentence_command", action='store',
             help="Command to run when an invalid sentence is detected")
-            
+
     parser.add_argument("-M", "--mind", type=str,
             dest="mind_dir", action='store',
             help="Path to mind to use for assistant")
@@ -99,7 +99,7 @@ def recognizer_finished(a, recognizer, text):
             subprocess.call(a.config.options['invalid_sentence_command'],
                             shell=True)
         print("\x1b[31m< ? >\x1b[0m {0}".format(t))
-        
+
 
 def log_history(a, text):
     if a.config.options['history']:
@@ -112,7 +112,7 @@ def log_history(a, text):
         with open(a.config.history_file, 'w') as hfile:
             for line in a.history:
                 hfile.write(line + '\n')
-                
+
 
 def run_command(a, cmd):
     """PRINT COMMAND AND RUN"""
@@ -121,7 +121,7 @@ def run_command(a, cmd):
     subprocess.call(cmd, shell=True)
     recognizer.listen()
 
-    
+
 def process_command(self, command):
     print(command)
     if command == "listen":
@@ -141,7 +141,7 @@ def process_command(self, command):
 
 
 if __name__ == '__main__':
-    
+
     # Parse command-line options,
     #  use `Config` to load mind configuration
     #  command-line overrides config file
@@ -149,13 +149,13 @@ if __name__ == '__main__':
     logger.debug("Arguments: {args}".format(args=args))
 
 
-    conf = Config(path=args.mind_dir, **vars(args))
-    
-    
+    conf = Config(path=args.mind_dir, **vars(args)) ## This is a problem for run.sh no idea why was yet
+
+
     #
     # Further patching to ease transition..
     #
-    
+
     # Configure Language
     logger.debug("Configuring Module: Language")
     conf.strings_file = os.path.join(conf.cache_dir, "sentences.corpus")
@@ -165,7 +165,7 @@ if __name__ == '__main__':
     # sphinx_jsgf2fsg < conf.jsgf_file > conf.fsg_file
     l = LanguageUpdater(conf)
     l.update_language()
-    
+
     # Configure Recognizer
     logger.debug("Configuring Module: Speech Recognition")
     recognizer = Recognizer(conf)
@@ -173,14 +173,14 @@ if __name__ == '__main__':
     #
     # End patching
     #
-    
+
 
     # A configured Assistant
     a = Assistant(config=conf)
-    
+
     recognizer.connect('finished', lambda rec, txt, agent=a: recognizer_finished(agent, rec, txt))
-        
-    
+
+
     #
     # Questionable dependencies
     #
@@ -201,7 +201,7 @@ if __name__ == '__main__':
     #  could supplant GObject features
     #a.run()
     recognizer.listen()
-    
+
 
     # Start Main Loop
     try:
@@ -211,4 +211,3 @@ if __name__ == '__main__':
         print(e)
         main_loop.quit()
         sys.exit()
-        
